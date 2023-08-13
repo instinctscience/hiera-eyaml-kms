@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "hiera-eyaml-kms"
-  gem.version       = "0.4"
+  gem.version       = "0.5"
   gem.description   = "AWS KMS encryptor for use with hiera-eyaml"
   gem.summary       = "Encryption plugin for hiera-eyaml backend for Hiera"
   gem.author        = "Chad Upton"

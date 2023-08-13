@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hiera-eyaml-kms (0.4)
+    hiera-eyaml-kms (0.5)
       aws-sdk-kms
 
 GEM
