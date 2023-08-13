@@ -10,17 +10,33 @@ class Hiera
       module Encryptors
 
         class Kms < Encryptor
+          # self.options = {
+          #   :key_id => {      :desc => "KMS Key ID",
+          #                     :type => :string,
+          #                     :default => "" },
+          # }
+          # look up the KMS key id from a KMS alias being passed in
+          # an environment variable
           self.options = {
-            :key_id => {      :desc => "KMS Key ID",
-                              :type => :string,
-                              :default => "" },
+            :key_alias => {
+              :desc => "KMS Alias",
+              :type => :string,
+              :default => ENV['KMS_ALIAS'] || "helm" },
           }
 
-          VERSION = "0.3"
+          def self.kms_key_id
+            @kms = ::Aws::KMS::Client.new()
+            resp = @kms.describe_key({
+              key_id: self.option(:key_alias)
+            })
+            resp.key_metadata.key_id
+          end
+
+          VERSION = "0.4"
           self.tag = "KMS"
 
           def self.encrypt plaintext
-            key_id = self.option :key_id
+            key_id = self.kms_key_id
             raise StandardError, "key_id is not defined" unless key_id
 
             @kms = ::Aws::KMS::Client.new()

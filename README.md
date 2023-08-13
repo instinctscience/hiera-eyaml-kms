@@ -38,29 +38,5 @@ Then see [hiera-eyaml documentation](https://github.com/TomPoulton/hiera-eyaml) 
 Configuration
 -------------
 
-This plugin adds 2 options to hiera-eyaml:
-
-```
---kms-key-id=<s>            KMS Key ID  (default: )
-```
-
-To avoid passing CLI parameters every call to eyaml, you can create a config file to set the defaults.
-
-Config files will be read first from `/etc/eyaml/config.yaml`, then from `~/.eyaml/config.yaml` and finally by anything referenced in the `EYAML_CONFIG` environment variable.
-
-Example:
-
-```yaml
----
-kms_key_id: '00000000-0000-0000-0000-000000000000'
-```
-
-EC2 Instance Profile:
-
-The aws-sdk will use an EC2 Instance Profile if one is present and an AWS profile is not specified.
-
-
-Authors
-=======
-
-- [Allan Denot](http://github.com/adenot)
+By default this plugin will look for a KMS alias called "helm" if the environment
+variable "KMS_ALIAS" is not defined.
